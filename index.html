@@ -742,7 +742,7 @@ async function submitPhone(){
     await fetch(WORKER, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({phone:answers.phone, name:answers.name||''})
+      body:JSON.stringify({phone:answers.phone, name:answers.name||'', answers:answers})
     });
   } catch(e){ console.warn('Worker:', e.message); }
   showResult();
