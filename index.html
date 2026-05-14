@@ -23,8 +23,11 @@
   --border:#D4E3EF;
   --light:#EEF4FA;
 }
-html,body{
-  min-height:100%;
+html{height:100%}
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
   background:var(--bg);
   font-family:'Inter',sans-serif;
   color:var(--dark);
@@ -128,10 +131,12 @@ html,body{
 .back-top:hover{color:var(--dark)}
 
 /* STEPS */
+.steps-wrap{flex:1;display:flex;flex-direction:column}
 .step{
   display:none;flex-direction:column;
   padding:28px 20px 32px;
   max-width:560px;margin:0 auto;width:100%;
+  flex:1;
 }
 .step.active{display:flex;animation:slideIn .32s cubic-bezier(.22,1,.36,1) both}
 .step.back{animation:slideInBack .32s cubic-bezier(.22,1,.36,1) both}
@@ -383,6 +388,7 @@ html,body{
   <div style="width:44px"></div>
 </div>
 
+<div class="steps-wrap">
 <!-- STEP 1 -->
 <div class="step active" id="step1">
   <p class="q-text" data-t="q1">Ya tienes cobertura de Medicare?</p>
@@ -392,7 +398,7 @@ html,body{
       <span class="check-circle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
     </button>
     <button class="opt-card" onclick="pickOpt(this,'coverage','no',event)">
-      <div class="opt-left"><span class="opt-emoji">&#x1F51C;</span><span data-t="q1b">Todavia no tengo Medicare</span></div>
+      <div class="opt-left"><span class="opt-emoji">&#x23F3;</span><span data-t="q1b">Todavia no tengo Medicare</span></div>
       <span class="check-circle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
     </button>
   </div>
@@ -535,6 +541,8 @@ html,body{
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
     <span data-t="resNote">Sin compromiso - En espanol o ingles</span>
   </p>
+</div>
+
 </div>
 
 <!-- FOOTER -->
