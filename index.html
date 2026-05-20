@@ -536,7 +536,12 @@ const nextMap = {
   s4b: () => 's-contact',
 };
 
-const stepMap = { s0:1, s1a:2, s2a:3, s3a:4, s4a:5, s1b:2, s2b:3, s3b:4, s4b:5 };
+const stepMap = {
+  s0:1,
+  s1a:2, s2a:3, s3a:4, s4a:5,
+  s1b:2, s2b:3, s3b:4, s4b:5,
+  's-contact':6, 's-contact2':7
+};
 
 function singleSelect(el, screenId) {
   document.querySelectorAll('#'+screenId+' .opt').forEach(o => o.classList.remove('selected'));
@@ -595,14 +600,25 @@ function nextFrom(screenId) {
 function updateProgress(screenId) {
   const fill = document.getElementById('progressFill');
   const label = document.getElementById('progressLabel');
-  const total = currentFlow === 'medicare' ? 5 : 4;
-  const step = stepMap[screenId];
-  if (!step) {
+
+  if (screenId === 's-success') {
     fill.style.width = '100%';
-    label.textContent = screenId === 's-success' ? '¡Completado!' : '¡Casi listo!';
+    label.textContent = '¡Completado! ✓';
+  } else if (screenId === 's-contact2') {
+    fill.style.width = '90%';
+    label.textContent = 'Último paso';
+  } else if (screenId === 's-contact') {
+    fill.style.width = '75%';
+    label.textContent = 'Paso 6 de 7';
+  } else if (screenId === 's-6-12' || screenId === 's-1yr') {
+    fill.style.width = '28%';
+    label.textContent = 'Información importante';
   } else {
-    fill.style.width = ((step/total)*100)+'%';
-    label.textContent = 'Pregunta '+step+' de '+total;
+    const step = stepMap[screenId];
+    if (step) {
+      fill.style.width = Math.round((step / 7) * 65) + '%';
+      label.textContent = 'Pregunta ' + step + ' de 5';
+    }
   }
 }
 
